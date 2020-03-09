@@ -3,14 +3,15 @@ class MembersController < ApplicationController
 
   # GET /members
   def index
-    @members = Member.all
+    members = Member.all
 
-    render json: @members
+    render json: MemberSerializer.new(members).to_serialzed_json
   end
 
   # GET /members/1
   def show
-    render json: @member
+    member = Member.find_by(id: params[:id])
+    render json: MemberSerializer.new(member).to_serialzed_json
   end
 
   # POST /members
